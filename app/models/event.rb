@@ -1,11 +1,11 @@
 class Event < ApplicationRecord
 	belongs_to :user
-	
+
 	has_many :attendances
 	has_many :users, through: :attendances
 
-	validates :start_date, presence: true, validate :start_in_future
-	validates :duration, presence: true, validate :multiple_of_5
+	validates :start_date, presence: true #validate :start_in_future
+	validates :duration, presence: true #validate :multiple_of_5
 	validates :title, presence: true, length: { :within => 5..140}
 	validates :description, presence: true, length: { :within => 20..1000}
 	validates :price, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 1000}
