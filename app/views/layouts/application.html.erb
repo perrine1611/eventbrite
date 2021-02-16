@@ -14,43 +14,58 @@
   </head>
 
   <body>
+
+    <!-- NAVBAR -->
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: #e3f2fd;">
     <div class="container-fluid">
-    <a class="navbar-brand" href="/events/index"> Eventbrite </a>
+    <a class="navbar-brand" href="#"></a>
+    <%= link_to 'Event Project', events_path, :class => 'navbar-brand' %>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
+
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     
-  <div class="navbar-nav">
-      <a class ="nav-link" href=""> Accueil </a>
-      <a class="nav-link" href="/events/new"> Créer un évènement </a>
-    </div>
-  </div>
+  <ul class="navbar-nav mr-auto">
+  <li class="nav-item active">
+  <%= link_to 'Créer un évènement', new_event_path, :class => 'nav-link' %>
+  </li>
+  </ul>
 
-  <!------ DROPDOWN BUTTON -->
+    <ul class="navbar-nav ml-auto">
 
-  <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Connexion </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-  
+          <!-- si utilisateur connecté -->
 
-    <% if current_user %>
+          <% if current_user %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <%= current_user.first_name %>
+              </a>
+              <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                <%= link_to 'Mon profil', user_path(current_user.id), :class => "dropdown-item text-light" %>
+                <%= link_to 'Déconnexion', destroy_user_session_path,method: :delete, :class => "dropdown-item text-light" %>
+              </div>
+            </li>
 
-    <a class="dropdown-item" href="/users/show"> Mon profil </a>
-    <a class="dropdown-item" href="/users/sign_out" data-method="delete"> Se déconnecter </a>
+          <!-- si non connecté -->
 
-    <% else %>
+          <% else%>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Connexion / Inscription
+              </a>
+              <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                <%= link_to 'Connexion', new_user_session_path, :class => "dropdown-item text-light" %>
+                <%= link_to 'Inscription', new_user_registration_path, :class => "dropdown-item text-light" %>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
 
-    <a class="dropdown-item" href="/users/sign_in"> Se connecter </a>
-    <a class="dropdown-item" href="/users/sign_up"> S'inscrire </a>
-
-    <% end %>
-  </div>
-</div>
-
-</nav>
 
     <%= yield %>
 
