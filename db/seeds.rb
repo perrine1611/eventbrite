@@ -11,3 +11,5 @@ User.create(first_name:"Clara", email:"clara@yopmail.com")
 User.create(first_name:"Claude", email:"claude@yopmail.com")
 User.create(first_name:"Bertrand", email:"bertrand@yopmail.com")
 User.create(first_name:"Martine", email:"martine@yopmail.com")
+
+Event.create(start_date: Time.now, duration:"50", title:"evenement 1", description:"evenement test", price:"10", location:"Paris")

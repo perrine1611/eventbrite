@@ -1,12 +1,9 @@
 class EventsController < ApplicationController
 	
-before_action :authenticate_user!, only: [:secret]
+before_action :authenticate_user!, except: [:index]
 
 	def index
 		@event = Event.all
-	end
-
-	def secret
 	end
 
 	def show
